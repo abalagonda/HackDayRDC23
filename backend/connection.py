@@ -57,11 +57,29 @@ class App:
         result = tx.run(query, person_name=person_name)
         return [record["name"] for record in result]
     
-    def create_person(tx,person_name):
+    def create_person(self,person_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_person_and_return, person_name)
+    @staticmethod
+    def create_person_and_return(tx, person_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
         query = (
-            "CREATE (p:Person)"
+            "CREATE (p1:Person { name: $person_name }) "
+            "RETURN p1"
         )
-        
+        result = tx.run(query, person_name=person_name)
+        try:
+            return [{"p1": record["p1"]["name"]}
+                    for record in result]
+        # Capture any errors along with the query and data for traceability
+        except Neo4jError as exception:
+            logging.error("{query} raised an error: \n {exception}".format(
+                query=query, exception=exception))
+            raise
+    
 
 
 
@@ -69,12 +87,11 @@ class App:
 
 if __name__ == "__main__":
     # Aura queries use an encrypted connection using the "neo4j+s" URI scheme
-    uri = "neo4j+s://<Bolt url for Neo4j Aura instance>"
+    uri = "neo4j+s://75896199.databases.neo4j.io"
     user = "neo4j"
     password = "tlH7aeOFOCH0D6TUw6lwHWNmCZ11Crr6e1xCySho7m8"
     app = App(uri, user, password)
-    print(app)
-    app.create_person(app)
+    app.create_person('Joe')
     # app.create_friendship("Alice", "David")
     # app.find_person("Alice")
     app.close()
