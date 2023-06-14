@@ -1,40 +1,14 @@
 .sidebar-container {
-    font-family: 'Arial', sans-serif; /* Replace 'Arial' with your desired font */
-  }.sidebar {
-    background-color: yellow;
-    color: white;
-    padding: 20px;
-    width: 200px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 33%;
     height: 100vh;
-  }
-  
-  .sidebar-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .menu-title {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  ul li {
-    margin-bottom: 10px;
-  }
-  
-  ul li a {
+    background-color: lightblue;
     color: white;
-    text-decoration: none;
   }
   
-  ul li ul {
-    margin-left: 15px;
+  .sidebar {
+    padding: 20px;
   }
   

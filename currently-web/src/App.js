@@ -31,13 +31,18 @@
 
 import React from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
+import Button from './components/Button/Button';
 const App = () => {
   return (
     <div className="app">
+
       <Sidebar />
+      <Button />
+
       {/* Add the rest of your app's content here */}
     </div>
   );
 };
 
 export default App;
+
