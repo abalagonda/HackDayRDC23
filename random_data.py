@@ -18,15 +18,23 @@ names_list = male_name_list + female_name_list
 person_nodes = {}
 
 random_location_list = ['default','corp n','corp s']
-hub_location_list = ['Bloomington']
+hub_location_list = ['Bloomington', "Atlanta", "Phoenix", "Dallas"]
+
+
 
 for i in range(1000):
     temp = {}
     temp['name']=names_list[i]
     temp['connected_to'] = random_location_list[random.randint(0,2)]
     temp['age'] = random.randint(15,50)
-
     person_nodes[i]= temp
+
+hub_node = {}
+for idx, i in enumerate(hub_location_list):
+    temp = {}
+    temp['name'] = i
+    temp['num_connected'] = random.randint(0,100)
+    hub_node[idx] = temp
 
 event_node = {}
 for idx,i in enumerate(random_location_list):
@@ -38,7 +46,10 @@ for idx,i in enumerate(random_location_list):
 
 
 for key in person_nodes:
-    print(key,person_nodes[key])
+    print(key, person_nodes[key])
 
 for key in event_node:
     print(key, event_node[key])
+
+for key in hub_node:
+    print(key, hub_node[key])
