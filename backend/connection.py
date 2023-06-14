@@ -81,23 +81,23 @@ class App:
                 query=query, exception=exception))
             raise
 
-    def create_status_node(self,status_name):
+    def create_status_node(self,loc_name):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
-                self.create_status_node_and_return, status_name)
+                self.create_status_node_and_return, loc_name)
             
     @staticmethod
-    def create_status_node_and_return(tx, status_name):
+    def create_status_node_and_return(tx, loc_name):
         # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
         # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
         query = (
             "CREATE (s1:Status { status_name:$status_name }) "
             "RETURN s1"
         )
-        result = tx.run(query, status_name=status_name)
+        result = tx.run(query, status_name=loc_name)
         try:
-            return [{"s1": record["s1"]["status_name"]}
+            return [{"s1": record["s1"]["loce_name"]}
                     for record in result]
         # Capture any errors along with the query and data for traceability
         except Neo4jError as exception:
