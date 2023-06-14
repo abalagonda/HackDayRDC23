@@ -36,7 +36,7 @@ const App = () => {
   return (
     <div className="app">
 
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Button />
 
       {/* Add the rest of your app's content here */}
