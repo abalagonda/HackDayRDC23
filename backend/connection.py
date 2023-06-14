@@ -56,6 +56,15 @@ class App:
         )
         result = tx.run(query, person_name=person_name)
         return [record["name"] for record in result]
+    
+    def create_person(tx,person_name):
+        query = (
+            "CREATE (p:Person)"
+        )
+        
+
+
+
 
 
 if __name__ == "__main__":
@@ -65,6 +74,7 @@ if __name__ == "__main__":
     password = "tlH7aeOFOCH0D6TUw6lwHWNmCZ11Crr6e1xCySho7m8"
     app = App(uri, user, password)
     print(app)
+    app.create_person(app)
     # app.create_friendship("Alice", "David")
     # app.find_person("Alice")
     app.close()
