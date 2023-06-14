@@ -1,5 +1,0 @@
-HACK DAY
-P
-
-
-
