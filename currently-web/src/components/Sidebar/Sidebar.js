@@ -3,7 +3,8 @@ import './Sidebar.css';
 import { Navigation } from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
-const Sidebar = () => {
+// const Sidebar = () => {
+  function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [description, setDescription] = useState('');
   const [showDescription, setShowDescription] = useState(false);
@@ -13,12 +14,12 @@ const Sidebar = () => {
   };
 
   return (
-    <>
-      <button className="hamburger" onClick={toggleSidebar}>
-        ☰
-      </button>
+    // <>
+    //   <button className="hamburger" onClick={toggleSidebar}>
+    //     ☰
+    //   </button>
 
-      {isOpen && (
+    //   {isOpen && (
         <div className="sidebar-container">
           <div className="sidebar">
             <h1 className="event-title">Coffee</h1>
@@ -57,8 +58,8 @@ const Sidebar = () => {
           </div>
         </div>
       )}
-    </>
-  );
-};
+//     </>
+//   );
+// };
 
 export default Sidebar;
