@@ -16,6 +16,25 @@ class App:
         # Don't forget to close the driver connection when you are finished with it
         self.driver.close()
 
+    # In - person
+
+    def create_status_relationship(self,person_id, status_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_status_relationship_and_return, person_id, status_name)
+            
+    @staticmethod
+    def create_status_relationship_and_return(tx, person_id, status_name, loc_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        query = (
+            "MATCH (p1:Person{id:$person_id}), (s1:Status{status_name:$status_name})"
+            "CREATE (p1)-[:CONNECTED_TO]->(s1)"
+        )
+        result = tx.run(query,person_id=person_id,status_name=status_name)
+
+    # Collaborative
 
     def create_status_relationship(self,person_id,status_name):
         with self.driver.session(database="neo4j") as session:
@@ -32,14 +51,10 @@ class App:
             "CREATE (p1)-[:CONNECTED_TO]->(s1)"
         )
         result = tx.run(query,person_id=person_id,status_name=status_name)
-        # try:
-        #     return [{"p1": record["p1"]["person_id"], "s1": record["s1"]["status_name"]}
-        #             for record in result]
-        # # Capture any errors along with the query and data for traceability
-        # except Neo4jError as exception:
-        #     logging.error("{query} raised an error: \n {exception}".format(
-        #         query=query, exception=exception))
-        #     raise
+
+
+
+
 
 
     def create_person(self,id,person_name,age,status):
