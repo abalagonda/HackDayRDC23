@@ -18,8 +18,11 @@ names_list = male_name_list + female_name_list
 person_nodes = {}
 
 random_location_list = ['default','corp n','corp s']
-hub_location_list = ['Bloomington', "Atlanta", "Phoenix", "Dallas"]
-
+hub_location_list = dict()
+hub_location_list['Bloomington'] = 40000
+hub_location_list['Atlanta'] = 30000
+hub_location_list['Phoenix'] = 20000
+hub_location_list['Dallas'] = 10000
 
 
 for i in range(1000):
