@@ -17,7 +17,7 @@ def create_data():
 
 
 
-    random_location_list = ['default','corp n','corp s']
+    status_list = ['remote','in_person','collaborative']
     hub_location_list = dict()
     hub_location_list['Bloomington'] = 40000
     hub_location_list['Atlanta'] = 30000
@@ -27,8 +27,9 @@ def create_data():
     person_nodes = {}
     for i in range(1000):
         temp = {}
+        temp['id'] = i
         temp['name']=names_list[i]
-        temp['connected_to'] = random_location_list[random.randint(0,2)]
+        temp['status'] = status_list[random.randint(0,2)]
         temp['age'] = random.randint(15,50)
         person_nodes[i]= temp
 
@@ -39,13 +40,12 @@ def create_data():
         temp['num_connected'] = random.randint(0,100)
         hub_node[idx] = temp
 
-    event_node = {}
-    for idx,i in enumerate(random_location_list):
+    status_node = {}
+    for idx,i in enumerate(status_list):
         temp = {}
         temp['name']=i
-        temp['num_connected']=random.randint(0,100)
-        event_node[idx]=temp
-    return person_nodes,hub_node,event_node
+        status_node[idx]=temp
+    return person_nodes,hub_node,status_node
 
 # for key in person_nodes:
 #     print(key, person_nodes[key])
