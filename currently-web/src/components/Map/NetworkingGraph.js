@@ -1,102 +1,76 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Options, Edge, Node } from "vis-network/standalone/esm/vis-network";
+import { Options } from "vis-network/standalone/esm/vis-network";
 
 import useVisNetwork from "./useVisNetwork";
-
-const nodes = [
-    {
-      id: "Library",
-      //color: "blue",
-      shape: "image",
-      image: "https://super.so/icon/dark/book-open.svg",
-      size: 30,
-    },
-    {
-      id: "Cafe",
-      //color: "blue",
-      shape: "image",
-      image: "https://super.so/icon/dark/coffee.svg",
-      size: 30,
-    },
-    {
-      id: "Movies",
-      //color: "blue",
-      shape: "image",
-      image: "https://super.so/icon/dark/film.svg",
-      size: 30,
-    },
-    {
-      id: "Sports",
-      color: "blue",
-      shape: "image",
-      image: "https://img.icons8.com/ios/250/000000/basketball.png",
-      size: 30,
-    },
-    {
-      id: "Workout",
-      color: "blue",
-      shape: "image",
-
-      image: "https://img.icons8.com/ios/250/000000/bicycle.png",
-      size: 35,
-    },
-    {
-      id: "Gaming",
-      color: "purple",
-      shape: "image",
-
-      image: "https://super.so/icon/dark/twitch.svg",
-      size: 30,
-    },
-];
-
-const edges= [
-];
+import BsFillBuildingFill from 'react-icons/fa';
 
 const options = {
   nodes: {
     shape: "dot",
-    size: 10
+    size: 10,
   },
   layout: {
     hierarchical: {
-      enabled: false
-    }
-  }
+      enabled: false,
+    },
+  },
 };
 
 function NetworkingGraph() {
-  const { ref, network } = useVisNetwork({
-    options,
-    nodes,
-    edges
-  });
-
-  const handleClick = () => {
-    if (!network) return;
-
-    network.focus(5);
-  };
+  const [graphData, setGraphData] = useState({ nodes: [], edges: [] });
 
   useEffect(() => {
-    if (!network) return;
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/location/in_person");
+        setGraphData(response.data);
+        console.log(response.data)
+      } catch (error) {
+        console.error("Error fetching graph data:", error);
+      }
+    };
 
-    network.once("beforeDrawing", () => {
-      network.focus(5);
-    });
-    network.setSelection({
-      edges: [],
-      nodes: []
-    });
+    fetchData();
+  }, []);
+
+  console.log(graphData.nodes)
+  console.log(graphData.links)
+
+  const hahaha = [
+    {id: 'North', image: BsFillBuildingFill, shape: 'image', size: 20, title: 'North'},
+    {id: 'M', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'M'},
+    {id: 'P', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'P'},
+    {id: 'L', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'L'},
+    {id: 'K', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'K'}
+    ]
+
+  const byebye = [
+    {from: "K", to: "L", color: "red"}
+  ]
+  const { ref, network } = useVisNetwork({
+    options,
+    nodes: hahaha, // Convert nodes to a DataSet
+    edges: [], // Convert edges to a DataSet
+  });
+
+  useEffect(() => {
+    if (network) {
+      network.once("beforeDrawing", () => {
+        network.focus(5);
+      });
+      network.setSelection({
+        edges: [],
+        nodes: [],
+      });
+    }
   }, [network]);
 
   return (
-    <>
-    {/* //<button onClick={handleClick}>Focus</button> */}
-    <div style={{ height: 700, width: "100%" }} ref={ref} />
-    </>
+    <div style={{ height: "100vh" }} ref={ref}>
+      {/* Additional components or JSX */}
+    </div>
   );
-};
+}
 
 export default NetworkingGraph;

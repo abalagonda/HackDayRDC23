@@ -1,8 +1,5 @@
-import { transform } from "@chakra-ui/react";
 import Neo4jGraph from "../../components/Graph/Graph";
 import Header from "../../components/Header";
-import Map from "../../components/Map";
-import ANYTHINGIWANT from "../../components/Map/index2";
 import Mode from "../../components/Mode/Mode";
 import Wave from 'react-wavify'
 const Home = () => {
@@ -13,6 +10,7 @@ const Home = () => {
   }
   return (
     <div>
+      <Neo4jGraph></Neo4jGraph>
       <div className="wave" style={mystyles}>
         <Wave fill='#5575f6'
           paused={false}

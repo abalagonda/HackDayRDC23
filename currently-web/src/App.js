@@ -8,6 +8,9 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Button from './components/Button/Button';
 import Event from './components/Event/Event'
 import RemotePage from "./pages/Remote";
+import OnlinePage from "./pages/Office";
+import CollaborativePage from "./pages/Collaborative";
+import InOfficePage from "./pages/Office";
 
 const attendees = ["John Doe", "Jane Smith", "Mike Johnson", "Emily Davis", "lorenzo", "aniketh", "carlos", "ved", "steven"];
 function App() {
@@ -17,6 +20,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/remote" element={<RemotePage />} />
+        <Route path="/in_person" element={<InOfficePage />} />
+        <Route path="/collaborative" element={<CollaborativePage />} />
         
         <Route exact path="*" element={<div>404 Not Found</div>} />
       </Routes>
