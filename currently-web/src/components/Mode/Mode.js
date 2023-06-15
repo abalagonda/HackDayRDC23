@@ -74,21 +74,13 @@ const Mode = ({mode_name}) => {
              <h1 className="title">Welcome to Currently</h1>
              <h2 className="sub-title">A place to connect with your peers across {"\n"} every mode of work</h2>
              <div className="mode-stage">
-<<<<<<< HEAD
-                <Button id="mode-ip" className="mode-block" onClick={() => {routeChange("/in_person")}}>
-=======
                 <Button id="mode-ip" className="mode-block" onClick={routeChange2}>
->>>>>>> c676c22d88ee09449b2d8042743c9a885972a40b
                     <p className="mode-text">In-person</p>
                 </Button>
                 <Button id="mode-rem" className="mode-block" onClick={() => {routeChange("/remote")}}>
                     <p className="mode-text">Remote</p>
                 </Button>
-<<<<<<< HEAD
-                <Button id="mode-col" className="mode-block" onClick={() => {routeChange("/collaborative")}}>
-=======
                 <Button id="mode-col" className="mode-block" onClick={routeChange3}>
->>>>>>> c676c22d88ee09449b2d8042743c9a885972a40b
                     <p className="mode-text">Collab</p>
                 </Button>
              </div>

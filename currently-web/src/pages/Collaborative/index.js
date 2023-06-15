@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MC, MainContainer, SC, SmallContainer, Text } from "./styles";
-import NetworkingGraph from "../../components/Map/NetworkingGraph";
+import NetworkingGraph from "../Collab/NetworkingGraph";
+import axios from "axios";
 
 const CollaborativePage = () => {
-  const quotes = [
-    "You got this 👏",
-    "My work ✨enhances✨ my life, but does not define 🙌 who I am",
-    "Today is an opportunity to learn, grow 🌱, and to become a ✨better✨ version of myself",
-    "Today will be a good day 🫶",
-    "You learn more from failure than from 🏆 succcess 🏆"
-  ];
+  const [graphData, setGraphData] = useState({ nodes: [], edges: [] });
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  const getRandomQuote = () => {
-    return quotes[Math.floor(Math.random() * quotes.length)];
-  };
-  const [quote, setQuote] = useState(getRandomQuote());
-  return (<NetworkingGraph/>);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/location/in_person"
+        );
+        setGraphData(response.data);
+        setDataLoaded(true);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching graph data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(graphData);
+  return (
+    dataLoaded && (
+      <NetworkingGraph nodes={graphData.nodes} links={graphData.links} />
+    )
+  );
 };
 export default CollaborativePage;

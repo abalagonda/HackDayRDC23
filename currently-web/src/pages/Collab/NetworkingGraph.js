@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Options } from "vis-network/standalone/esm/vis-network";
+// import { Options } from "vis-network/standalone/esm/vis-network";
 
 import useVisNetwork from "./useVisNetwork";
-import BsFillBuildingFill from 'react-icons/fa';
-
+// import { TbCircleLetterM } from "react-icons/tb";
 const options = {
   nodes: {
     shape: "dot",
@@ -17,45 +16,16 @@ const options = {
   },
 };
 
-function NetworkingGraph() {
-  const [graphData, setGraphData] = useState({ nodes: [], edges: [] });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/location/in_person");
-        setGraphData(response.data);
-        console.log(response.data)
-      } catch (error) {
-        console.error("Error fetching graph data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(graphData.nodes)
-  console.log(graphData.links)
-
-  const hahaha = [
-    {id: 'North', image: BsFillBuildingFill, shape: 'image', size: 20, title: 'North'},
-    {id: 'M', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'M'},
-    {id: 'P', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'P'},
-    {id: 'L', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'L'},
-    {id: 'K', image: "https://cdn.onlinewebfonts.com/svg/img_202252.png", shape: 'image', size: 20, title: 'K'}
-    ]
-
-  const byebye = [
-    {from: "K", to: "L", color: "red"}
-  ]
+function NetworkingGraph({ nodes, links }) {
+  // const byebye = [{ from: "K", to: "L", color: "red" }];
   const { ref, network } = useVisNetwork({
     options,
-    nodes: hahaha, // Convert nodes to a DataSet
-    edges: [], // Convert edges to a DataSet
+    nodes: nodes, // Convert nodes to a DataSet
+    edges: links, // Convert edges to a DataSet
   });
 
   useEffect(() => {
-    if (network) {
+    if (network && nodes > 0) {
       network.once("beforeDrawing", () => {
         network.focus(5);
       });
@@ -64,10 +34,10 @@ function NetworkingGraph() {
         nodes: [],
       });
     }
-  }, [network]);
+  }, [network, nodes]);
 
   return (
-    <div style={{ height: "100vh" }} ref={ref}>
+    <div style={{ width: "100%", height: "70rem" }} ref={ref}>
       {/* Additional components or JSX */}
     </div>
   );
