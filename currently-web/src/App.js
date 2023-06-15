@@ -17,7 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/remote" element={<RemotePage />} />
-        <Route exact path="*" element={"404 Not Found"} />
+        
+        <Route exact path="*" element={<div>404 Not Found</div>} />
       </Routes>
     </BrowserRouter>
 
