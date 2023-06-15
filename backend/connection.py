@@ -18,7 +18,7 @@ class App:
 
     # In - person
 
-    def create_status_relationship(self,loc_name, status_name):
+    def create_status_relationship(self, person_id, status_name):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
@@ -83,7 +83,6 @@ class App:
             "CREATE (l1)<-[:IS_LOC_IN]-(e1)"
         )
         result = tx.run(query,loc_name=loc_name,event_name=event_name)
-    
 
 
     def create_person(self,id,person_name,age,status):
