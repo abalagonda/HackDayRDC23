@@ -5,6 +5,7 @@ const RemotePage = () => {
   const quotes = [
     "You got this 👏",
     "Today is an opportunity to learn, grow 🌱, and to become a ✨better✨ version of myself",
+    "Today will be a good day 🙌"
   ];
 
   const getRandomQuote = () => {

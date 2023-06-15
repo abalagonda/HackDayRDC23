@@ -5,59 +5,41 @@ import useVisNetwork from "./useVisNetwork";
 
 const nodes = [
     {
-      id: "Library",
+      id: "K",
       color: "blue",
       shape: "image",
-      image: "https://super.so/icon/dark/book-open.svg",
-      size: 20,
+      image: "https://cdn.onlinewebfonts.com/svg/img_524996.png",
+      size: 40,
     },
     {
-      id: "Cafe",
+      id: "L",
       color: "blue",
       shape: "image",
-      image: "https://super.so/icon/dark/coffee.svg",
-      size: 20,
+      image: "https://cdn-icons-png.flaticon.com/512/7297/7297826.png",
+      size: 40,
     },
     {
-      id: "Movies",
+      id: "M",
       color: "blue",
       shape: "image",
-      image: "https://super.so/icon/dark/film.svg",
-      size: 20,
+      image: "https://cdn.onlinewebfonts.com/svg/img_202252.png",
+      size: 40,
     },
     {
-      id: "Sports",
+      id: "RDC",
       color: "blue",
       shape: "image",
-      image: "https://img.icons8.com/ios/250/000000/basketball.png",
-      size: 20,
-    },
-    {
-      id: "Workout",
-      color: "blue",
-      shape: "image",
-
-      image: "https://img.icons8.com/ios/250/000000/bicycle.png",
-      size: 20,
-    },
-    {
-      id: "Gaming",
-      color: "purple",
-      shape: "image",
-
-      image: "https://super.so/icon/dark/twitch.svg",
-      size: 20,
+      image: "https://clipart-library.com/new_gallery/357-3575331_star-icon-png-star-icon-black-and-white.png",
+      size: 40,
     },
 ];
 
 const edges= [
-  { from: "Gaming", to: "Cafe", color: "red" },
-  { from: "Library", to: "Movies", color: "red" },
-  { from: "Library", to: "Sports", color: "red" },
-  { from: "Library", to: "Workout", color: "red" },
-  { from: "Sports", to: "Workout", color: "red" },
-  { from: "Workout", to: "Gaming", color: "red" },
-];
+  { from: "K", to: "L", color: "red" },
+  { from: "RDC", to: "M", color: "red" },
+  { from: "M", to: "K", color: "red" },
+  { from: "L", to: "RDC", color: "red" },
+]
 
 const options = {
   nodes: {
@@ -71,7 +53,7 @@ const options = {
   }
 };
 
-function Index2() {
+function InOGraph() {
   const { ref, network } = useVisNetwork({
     options,
     edges,
@@ -104,4 +86,4 @@ function Index2() {
   );
 };
 
-export default Index2;
+export default InOGraph;
