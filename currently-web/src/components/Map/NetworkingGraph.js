@@ -6,33 +6,31 @@ import useVisNetwork from "./useVisNetwork";
 const nodes = [
     {
       id: "Library",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/book-open.svg",
-      size: 20,
+      size: 30,
     },
     {
       id: "Cafe",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/coffee.svg",
-      //image:
-      //"https://www.flaticon.com/free-icons/maps-and-location",
-      size: 20,
+      size: 30,
     },
     {
       id: "Movies",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/film.svg",
-      size: 20,
+      size: 30,
     },
     {
       id: "Sports",
       color: "blue",
       shape: "image",
       image: "https://img.icons8.com/ios/250/000000/basketball.png",
-      size: 20,
+      size: 30,
     },
     {
       id: "Workout",
@@ -40,7 +38,7 @@ const nodes = [
       shape: "image",
 
       image: "https://img.icons8.com/ios/250/000000/bicycle.png",
-      size: 20,
+      size: 35,
     },
     {
       id: "Gaming",
@@ -48,28 +46,17 @@ const nodes = [
       shape: "image",
 
       image: "https://super.so/icon/dark/twitch.svg",
-      size: 20,
+      size: 30,
     },
 ];
 
 const edges= [
-  //{ from: "AWS", to: "Library", color: "red" },
-  //{ from: "AWS", to: "Cafe", color: "red" },
+  { from: "Gaming", to: "Cafe", color: "red" },
   { from: "Library", to: "Movies", color: "red" },
   { from: "Library", to: "Sports", color: "red" },
   { from: "Library", to: "Workout", color: "red" },
-  { from: "Workout", to: "AWS", color: "red" },
   { from: "Sports", to: "Workout", color: "red" },
   { from: "Workout", to: "Gaming", color: "red" },
-  //{ from: "AWS", to: "Gaming", color: "purple" },
-  { from: "Gaming", to: "Saas", color: "purple" },
-  { from: "Saas", to: "Cafe", color: "purple" },
-  { from: "Cafe", to: "Appengine", color: "purple" },
-  { from: "Githup", to: "Jenkins", color: "purple" },
-  { from: "Sematext", to: "Appengine", color: "purple" },
-  { from: "Githup", to: "Sematext", color: "purple" },
-  //{ from: "Sematext", to: "AWS", color: "purple" },
-  { from: "Jenkins", to: "Gaming", color: "purple" },
 ];
 
 const options = {
@@ -84,7 +71,7 @@ const options = {
   }
 };
 
-function Index2() {
+function NetworkingGraph() {
   const { ref, network } = useVisNetwork({
     options,
     edges,
@@ -111,10 +98,10 @@ function Index2() {
 
   return (
     <>
-      <button onClick={handleClick}>Focus</button>
-      <div style={{ height: 700, width: "100%" }} ref={ref} />
+    {/* //<button onClick={handleClick}>Focus</button> */}
+    <div style={{ height: 700, width: "100%" }} ref={ref} />
     </>
   );
 };
 
-export default Index2;
+export default NetworkingGraph;
