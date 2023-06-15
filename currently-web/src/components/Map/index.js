@@ -73,14 +73,6 @@ const Map = () => {
         image: "https://super.so/icon/dark/twitch.svg",
         size: 20,
       },
-      {
-        id: "Saas",
-        color: "purple",
-        shape: "image",
-
-        image: "https://ongoingwarehouse.com/Pictures/MicrosoftTeams-image.png",
-        size: 20,
-      },
       // {
       //   id: "Notion",
       //   color: "purple",
@@ -90,37 +82,6 @@ const Map = () => {
       //     "https://cdn.icon-icons.com/icons2/2429/PNG/512/notion_logo_icon_147257.png",
       //   size: 20,
       // },
-      {
-        id: "Appengine",
-        color: "purple",
-        shape: "image",
-        image:
-          "https://www.howtogeek.com/wp-content/uploads/csit/2020/06/29add7ff.png?height=200p&trim=2,2,2,2",
-        size: 20,
-      },
-      {
-        id: "Sematext",
-        color: "purple",
-        shape: "image",
-        image:
-          "https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_d6fa77d54b71a3a68842371d85aba442/sematext-cloud.jpg",
-        size: 20,
-      },
-      {
-        id: "Jenkins",
-        color: "purple",
-        shape: "image",
-        image:
-          "https://www.learntek.org/blog/wp-content/uploads/2018/05/jenkins_image.png",
-        size: 20,
-      },
-      {
-        id: "Githup",
-        color: "purple",
-        shape: "image",
-        image: "https://foundations.projectpythia.org/_images/GitHub-logo.png",
-        size: 20,
-      },
     ],
     edges: [
       //{ from: "AWS", to: "Library", color: "red" },
@@ -206,7 +167,7 @@ const Map = () => {
   // Function to zoom out
   const handleZoomOut = () => {
     if (graphRef.current) {
-      // graphRef.current.zoomOut();
+      //graphRef.current.zoomOut();
     }
   };
 
@@ -223,7 +184,7 @@ const Map = () => {
           //border: "20px",
         }}
       >
-        {/* <Network
+        <Network
           graph={data}
           ref={graphRef}
           options={options}
@@ -250,9 +211,7 @@ const Map = () => {
                   ctx.fillStyle = "#ffcc00";
                   ctx.fillRect(
                     nodePosition.x + nodeSize + 2,
-                    nodePosition.y + nodeSize - 20,
-                    50,
-                    20
+                    nodePosition.y + nodeSize - 20, 50, 20
                   );
                   ctx.fillText(nodePosition.x, nodePosition.y + nodeSize + 20);
                   ctx.font = "12px Arial";
@@ -280,7 +239,7 @@ const Map = () => {
                     nodePosition.x + nodeSize + 5,
                     nodePosition.y + nodeSize + 5,
                     iconWidth,
-                    iconHeight
+                    iconHeight,
                   );
                   iconImg.addEventListener("mouseover", myFunction, "false");
                 }
@@ -288,14 +247,14 @@ const Map = () => {
             });
           }}
           
-        /> */}
         style={{
-            display: "100%",
+            display: "200%",
             height: "40rem",
             width: "40rem",
             justifyContent: "center",
             flexDirection: 'row',
           }}
+        />
       </Grid>
     </>
   );

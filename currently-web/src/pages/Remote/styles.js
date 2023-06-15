@@ -30,7 +30,3 @@ export const SmallContainer = styled.div`
 //   text-align: center;
 // }
 
-.centered {
-  display: inline-block;
-}
-
