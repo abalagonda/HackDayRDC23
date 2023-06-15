@@ -16,8 +16,6 @@ const nodes = [
       color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/coffee.svg",
-      //image:
-      //"https://www.flaticon.com/free-icons/maps-and-location",
       size: 20,
     },
     {
@@ -53,23 +51,12 @@ const nodes = [
 ];
 
 const edges= [
-  //{ from: "AWS", to: "Library", color: "red" },
-  //{ from: "AWS", to: "Cafe", color: "red" },
+  { from: "Gaming", to: "Cafe", color: "red" },
   { from: "Library", to: "Movies", color: "red" },
   { from: "Library", to: "Sports", color: "red" },
   { from: "Library", to: "Workout", color: "red" },
-  { from: "Workout", to: "AWS", color: "red" },
   { from: "Sports", to: "Workout", color: "red" },
   { from: "Workout", to: "Gaming", color: "red" },
-  //{ from: "AWS", to: "Gaming", color: "purple" },
-  { from: "Gaming", to: "Saas", color: "purple" },
-  { from: "Saas", to: "Cafe", color: "purple" },
-  { from: "Cafe", to: "Appengine", color: "purple" },
-  { from: "Githup", to: "Jenkins", color: "purple" },
-  { from: "Sematext", to: "Appengine", color: "purple" },
-  { from: "Githup", to: "Sematext", color: "purple" },
-  //{ from: "Sematext", to: "AWS", color: "purple" },
-  { from: "Jenkins", to: "Gaming", color: "purple" },
 ];
 
 const options = {
@@ -111,8 +98,8 @@ function Index2() {
 
   return (
     <>
-      <button onClick={handleClick}>Focus</button>
-      <div style={{ height: 700, width: "100%" }} ref={ref} />
+    {/* //<button onClick={handleClick}>Focus</button> */}
+    <div style={{ height: 700, width: "100%" }} ref={ref} />
     </>
   );
 };
