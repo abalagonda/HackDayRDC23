@@ -7,7 +7,7 @@ const Neo4jGraph = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/nodes");
+        const response = await axios.get("http://localhost:5000/api/location/in_person");
         setGraphData(response.data);
       } catch (error) {
         console.error("Error fetching graph data:", error);
@@ -20,12 +20,12 @@ const Neo4jGraph = () => {
   return (
     <div>
       <h1>Graph:</h1>
-      {graphData.nodes.length > 0 && graphData.links.length > 0 ? (
+      {graphData.nodes.length > 0  ? (
         <div>
           <h2>Nodes:</h2>
           <ul>
             {graphData.nodes.map((node) => (
-              <li key={node.id}>{node.label}</li>
+              <li key={node.id}>{node.id}</li>
             ))}
           </ul>
 
