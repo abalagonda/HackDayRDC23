@@ -18,9 +18,9 @@ def create_data():
 
     status_list = dict()
     stati = ['remote', 'in_person', 'collaborative']
-    status_list['remote'] = ['home']
-    status_list['in_person'] = ['K', 'L', 'P', 'M', 'North']
-    status_list['collaborative'] = ['Starbucks', 'Panera', 'Gloria Jeans', 'BPL', 'NPL']
+    status_list['remote'] = [('home','null')]
+    status_list['in_person'] = [('K','Corporate'), ('L','Corporate'), ('P','Corporate'), ('M','Corporate'), ('North','Corporate')]
+    status_list['collaborative'] = [('Starbucks','Cafe'), ('Gloria Jeans','Cafe'), ('BPL','Library'), ('NPL','Library'),('State Farm Park','Sports'),('LifeTime','Gym'),('AMC','Movies')]
     # ['remote','in_person','collaborative']
     # in_person_list = ['K', 'L', 'P', 'M', 'North']
     # collaborative_list = ['Starbucks', 'Panera', 'Gloria Jeans', 'BPL', 'NPL']
@@ -29,14 +29,15 @@ def create_data():
     # hub_location_list['Atlanta'] = 30000
     # hub_location_list['Phoenix'] = 20000
     # hub_location_list['Dallas'] = 10000
-
+    skills = ["Java", "Python", "C++", "AWS", "Terraform", "Blockchain"]
     person_nodes = {}
     for i in range(200):
         temp = {}
         temp['id'] = i
+        temp["skills"] = random.sample(skills,2) 
         temp['name']=names_list[i]
         num = random.randint(0,2)
-        temp['loc'] = status_list[stati[num]][random.randint(0, len(status_list[stati[num]]) - 1)]
+        temp['loc'] = status_list[stati[num]][random.randint(0, len(status_list[stati[num]]) - 1)][0]
         temp['status']=stati[num]
         temp['age'] = random.randint(15,50)
         person_nodes[i]= temp
@@ -62,10 +63,15 @@ def create_data():
     for key in status_list.keys():
 
         for x in status_list[key]:
-            loc_node[i] = x
+            temp ={}
+            temp['genre']= x[1]
+            temp['loc_name'] = x[0]
+
+            loc_node[i] = temp
 
             i += 1
 
+    # print(loc_node)
 
     
     ip_event_titles = [
@@ -89,25 +95,25 @@ def create_data():
         temp = {}
         temp['event_name']=i
         temp['status']='in_person'
-        temp['loc']=status_list['in_person'][random.randint(0,len(status_list['in_person'])-1)]
+        temp['loc']=status_list['in_person'][random.randint(0,len(status_list['in_person'])-1)][0]
         event_nodes[idx] = temp
         idx+=1
     for  i in collab_event_titles:
         temp = {}
         temp['event_name']=i
         temp['status']='collaborative'
-        temp['loc']=status_list['collaborative'][random.randint(0,len(status_list['collaborative'])-1)]
+        temp['loc']=status_list['collaborative'][random.randint(0,len(status_list['collaborative'])-1)][0]
         event_nodes[idx] = temp
         idx+=1
     for i in remote_event_titles:
         temp = {}
         temp['event_name']=i
         temp['status']='remote'
-        temp['loc']=status_list['remote'][0]
+        temp['loc']=status_list['remote'][0][0]
         event_nodes[idx] = temp
         idx+=1
     
-    
+
     # for key in loc_node:
     #     print(key, loc_node[key])
     # for key in event_nodes:
