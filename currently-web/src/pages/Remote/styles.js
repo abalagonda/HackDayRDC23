@@ -1,10 +1,16 @@
 import { styled } from "styled-components";
 
 export const MainContainer = styled.div`
-  height: 100vh; /* Sets the height of the parent container to the full viewport height */
+  min-height: 100vh;
   display: flex;
-  align-items: center; /* Vertically aligns the content */
+  background-color: white;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #252525;
+  font-family: inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 `;
 
 export const SmallContainer = styled.div`
@@ -16,21 +22,23 @@ export const SmallContainer = styled.div`
   align-items: center;
 `;
 
-// export const MC = styled.div`
-// `;
-// html, body {
-//   height: 100%;
-//   margin: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
+export const MC = styled.html`
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-// .container {
-//   text-align: center;
-// }
+export const SC = styled.body`
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-.centered {
+export const Text = styled.div`
+  text-align: center;
   display: inline-block;
-}
-
+`;

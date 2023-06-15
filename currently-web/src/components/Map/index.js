@@ -223,7 +223,7 @@ const Map = () => {
           //border: "20px",
         }}
       >
-        {/* <Network
+        <Network
           graph={data}
           ref={graphRef}
           options={options}
@@ -287,15 +287,14 @@ const Map = () => {
               });
             });
           }}
-          
-        /> */}
-        style={{
+          style={{
             display: "100%",
             height: "40rem",
             width: "40rem",
             justifyContent: "center",
-            flexDirection: 'row',
+            flexDirection: "row",
           }}
+        />
       </Grid>
     </>
   );
