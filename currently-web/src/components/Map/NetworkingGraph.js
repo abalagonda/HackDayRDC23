@@ -7,31 +7,31 @@ import useVisNetwork from "./useVisNetwork";
 const nodes = [
     {
       id: "Library",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/book-open.svg",
-      size: 20,
+      size: 30,
     },
     {
       id: "Cafe",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/coffee.svg",
-      size: 20,
+      size: 30,
     },
     {
       id: "Movies",
-      color: "blue",
+      //color: "blue",
       shape: "image",
       image: "https://super.so/icon/dark/film.svg",
-      size: 20,
+      size: 30,
     },
     {
       id: "Sports",
       color: "blue",
       shape: "image",
       image: "https://img.icons8.com/ios/250/000000/basketball.png",
-      size: 20,
+      size: 30,
     },
     {
       id: "Workout",
@@ -39,7 +39,7 @@ const nodes = [
       shape: "image",
 
       image: "https://img.icons8.com/ios/250/000000/bicycle.png",
-      size: 20,
+      size: 35,
     },
     {
       id: "Gaming",
@@ -47,7 +47,7 @@ const nodes = [
       shape: "image",
 
       image: "https://super.so/icon/dark/twitch.svg",
-      size: 20,
+      size: 30,
     },
 ];
 
@@ -66,27 +66,7 @@ const options = {
   }
 };
 
-function Map() {
-
-  // const [nodes, setNodes] = useState();
-  // const [edges, setEdges] = useState();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:5000/api/location/in_person");
-  //       setNodes(response.data.nodes);
-  //       console.log(nodes)
-  //       setEdges(response.data.edges);
-  //     } catch (error) {
-  //       console.error("Error fetching graph data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-
+function NetworkingGraph() {
   const { ref, network } = useVisNetwork({
     options,
     nodes,
@@ -119,4 +99,4 @@ function Map() {
   );
 };
 
-export default Map;
+export default NetworkingGraph;
