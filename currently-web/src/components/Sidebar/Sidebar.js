@@ -3,7 +3,6 @@ import './Sidebar.css';
 import { Navigation } from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import Event from '../Event/Event';
-// const Sidebar = () => {
 function Sidebar({sidebar_name, sidebar_desc, attendees}) {
   const sn = sidebar_name
   const sd = sidebar_desc
@@ -41,12 +40,6 @@ function Sidebar({sidebar_name, sidebar_desc, attendees}) {
               title: 'Attendees',
               itemId: '/people',
               subNav: attendeeSubNav
-              // subNav: [
-              //   {
-              //     title: attendees[0],
-              //     ItemId: '/people/peps'
-              //   }
-              // ]
             },
           ]}
         />

@@ -40,22 +40,9 @@ const App = () => {
 
   return (
     <div className="app">
-
-      {/* <Sidebar /> */}
-      {/* const e1 = new Event("Lunch w the Founder", "come join us on the quad fool");
-      const e2 = new Event("Movie", "pull up cuh"); */}
       <div classname="event">
-
         <Event classname="dance" event_name={"Dance"} event_desc={"We boolin"} attendees={attendees}></Event>
       </div>
-      {/* <div classname="event">
-        <Event classname="dance" event_name={"Coffee"} event_desc={"We boolin"} attendees={["jgew fejhwiofj"]}></Event>
-      </div> */}
-      {/* <Event name={"Ride"} description={"We boolin"}></Event> */}
-      {/* <e1 />
-      <e2 /> */}
-      {/* <Button /> */}
-      {/* Add the rest of your app's content here */}
     </div>
   );
 };
