@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Options, Edge, Node } from "vis-network/standalone/esm/vis-network";
 
-import useVisNetwork from "./useVisNetwork";
+import useVisNetwork from "../Collab/useVisNetwork";
 
 const nodes = [
     {
