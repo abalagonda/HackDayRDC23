@@ -225,7 +225,7 @@ if __name__ == "__main__":
         print(person_nodes[key]['status'])
         print(event_nodes[rand_val]['status'])
         if person_nodes[key]['status'] == 'in_person':
-            if event_nodes[rand_val]['status']=='in_person':
+            if event_nodes[rand_val]['status']=='in_person' and event_nodes[rand_val]['loc']==person_nodes[key]['loc']:
                 app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
                 print('inperson')
         elif person_nodes[key]['status'] == 'remote':
@@ -233,7 +233,7 @@ if __name__ == "__main__":
                 app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
                 print('remote')
         elif person_nodes[key]['status'] == 'collaborative':
-            if event_nodes[rand_val]['status']=='collaborative':
+            if event_nodes[rand_val]['status']=='collaborative' and event_nodes[rand_val]['loc']==person_nodes[key]['loc']:
                 app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
                 print('collab')
         print()
