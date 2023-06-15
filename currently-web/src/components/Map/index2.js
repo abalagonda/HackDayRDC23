@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Options, Edge, Node } from "vis-network/standalone/esm/vis-network";
 
 import useVisNetwork from "./useVisNetwork";
@@ -51,12 +52,6 @@ const nodes = [
 ];
 
 const edges= [
-  { from: "Gaming", to: "Cafe", color: "red" },
-  { from: "Library", to: "Movies", color: "red" },
-  { from: "Library", to: "Sports", color: "red" },
-  { from: "Library", to: "Workout", color: "red" },
-  { from: "Sports", to: "Workout", color: "red" },
-  { from: "Workout", to: "Gaming", color: "red" },
 ];
 
 const options = {
@@ -71,11 +66,31 @@ const options = {
   }
 };
 
-function Index2() {
+function Map() {
+
+  // const [nodes, setNodes] = useState();
+  // const [edges, setEdges] = useState();
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/api/location/in_person");
+  //       setNodes(response.data.nodes);
+  //       console.log(nodes)
+  //       setEdges(response.data.edges);
+  //     } catch (error) {
+  //       console.error("Error fetching graph data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+
   const { ref, network } = useVisNetwork({
     options,
-    edges,
-    nodes
+    nodes,
+    edges
   });
 
   const handleClick = () => {
@@ -104,4 +119,4 @@ function Index2() {
   );
 };
 
-export default Index2;
+export default Map;
