@@ -1,0 +1,22 @@
+.event-container {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+/* .event-node {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    border-radius: 50%;
+} */
+
+.text {
+    font-family: Futura, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
