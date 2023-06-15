@@ -34,7 +34,7 @@ def create_data():
     for i in range(200):
         temp = {}
         temp['id'] = i
-        temp["skills"] = random.sample(skills,2) 
+        temp['skills'] = random.choice(skills) 
         temp['name']=names_list[i]
         num = random.randint(0,2)
         temp['loc'] = status_list[stati[num]][random.randint(0, len(status_list[stati[num]]) - 1)][0]

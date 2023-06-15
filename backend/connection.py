@@ -86,21 +86,21 @@ class App:
     
 
 
-    def create_person(self,id,person_name,age,status):
+    def create_person(self,id,person_name,age,status,skills):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
-                self.create_person_and_return, id, person_name,age,status)
+                self.create_person_and_return, id, person_name,age,status,skills)
     
     @staticmethod
-    def create_person_and_return(tx,id,person_name,age,status):
+    def create_person_and_return(tx,id,person_name,age,status,skills):
         # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
         # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
         query = (
-            "CREATE (p1:Person { id:$id, name: $person_name, age: $age, status:$status}) "
+            "CREATE (p1:Person { id:$id, name: $person_name, age: $age, status:$status,skills:$skills}) "
             "RETURN p1"
         )
-        result = tx.run(query, id=id, person_name=person_name,age=age,status=status)
+        result = tx.run(query, id=id, person_name=person_name,age=age,status=status,skills=skills)
         try:
             return [{"p1": record["p1"]["name"]}
                     for record in result]
@@ -207,7 +207,7 @@ if __name__ == "__main__":
         app.create_event_node(event_nodes[key]['event_name'],event_nodes[key]['status'],event_nodes[key]['loc'])
 
     for key in person_nodes:
-        app.create_person(person_nodes[key]['id'],person_nodes[key]['name'],person_nodes[key]['age'],person_nodes[key]['loc'])
+        app.create_person(person_nodes[key]['id'],person_nodes[key]['name'],person_nodes[key]['age'],person_nodes[key]['loc'],person_nodes[key]['skills'])
 
 
 
