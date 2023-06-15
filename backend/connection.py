@@ -5,7 +5,7 @@ from neo4j import GraphDatabase
 from neo4j.exceptions import Neo4jError
 
 import random_data as rd
-
+import random
 
 class App:
 
@@ -18,43 +18,72 @@ class App:
 
     # In - person
 
-    def create_status_relationship(self,person_id, status_name):
+    def create_status_relationship(self,loc_name, status_name):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
-                self.create_status_relationship_and_return, person_id, status_name)
+                self.create_status_relationship_and_return, loc_name, status_name)
             
     @staticmethod
-    def create_status_relationship_and_return(tx, person_id, status_name, loc_name):
+    def create_status_relationship_and_return(tx, loc_name, status_name):
         # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
         # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
         query = (
-            "MATCH (p1:Person{id:$person_id}), (s1:Status{status_name:$status_name})"
-            "CREATE (p1)-[:CONNECTED_TO]->(s1)"
+            "MATCH (l1:Location{loc_name:$loc_name}), (s1:Status{status_name:$status_name})"
+            "CREATE (l1)-[:CONNECTED_TO]->(s1)"
         )
-        result = tx.run(query,person_id=person_id,status_name=status_name)
+        result = tx.run(query,loc_name=loc_name,status_name=status_name)
 
     # Collaborative
 
-    def create_status_relationship(self,person_id,status_name):
+    def create_loc_relationship(self,person_id,loc):
         with self.driver.session(database="neo4j") as session:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
-                self.create_status_relationship_and_return, person_id,status_name)
+                self.create_loc_relationship_and_return, person_id,loc)
             
     @staticmethod
-    def create_status_relationship_and_return(tx, person_id,status_name):
+    def create_loc_relationship_and_return(tx, person_id,loc):
         # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
         # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
         query = (
-            "MATCH (p1:Person{id:$person_id}), (s1:Status{status_name:$status_name})"
-            "CREATE (p1)-[:CONNECTED_TO]->(s1)"
+            "MATCH (p1:Person{id:$person_id}), (l1:Location{loc_name:$loc})"
+            "CREATE (p1)-[:LOCATED_AT]->(l1)"
         )
-        result = tx.run(query,person_id=person_id,status_name=status_name)
-
-
-
-
+        result = tx.run(query,person_id=person_id,loc=loc)
+    
+    def create_event_person_relationship(self,person_id,event_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_event_person_relationship_and_return, person_id,event_name)
+            
+    @staticmethod
+    def create_event_person_relationship_and_return(tx, person_id,event_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        query = (
+            "MATCH (p1:Person{id:$person_id}), (e1:Event{event_name:$event_name})"
+            "CREATE (p1)-[:IS_AT]->(e1)"
+        )
+        result = tx.run(query,person_id=person_id,event_name=event_name)
+    
+    def create_event_location_relationship(self,loc_name,event_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_event_location_relationship_and_return, loc_name, event_name)
+            
+    @staticmethod
+    def create_event_location_relationship_and_return(tx, loc_name,event_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        query = (
+            "MATCH (l1:Location{loc_name:$loc_name}), (e1:Event{event_name:$event_name})"
+            "CREATE (l1)<-[:IS_LOC_IN]-(e1)"
+        )
+        result = tx.run(query,loc_name=loc_name,event_name=event_name)
+    
 
 
     def create_person(self,id,person_name,age,status):
@@ -62,7 +91,7 @@ class App:
             # Write transactions allow the driver to handle retries and transient errors
             result = session.execute_write(
                 self.create_person_and_return, id, person_name,age,status)
-            
+    
     @staticmethod
     def create_person_and_return(tx,id,person_name,age,status):
         # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
@@ -97,7 +126,7 @@ class App:
         )
         result = tx.run(query, status_name=loc_name)
         try:
-            return [{"s1": record["s1"]["loce_name"]}
+            return [{"s1": record["s1"]["status_name"]}
                     for record in result]
         # Capture any errors along with the query and data for traceability
         except Neo4jError as exception:
@@ -105,25 +134,122 @@ class App:
                 query=query, exception=exception))
             raise
     
-
+    def create_loc_node(self,loc_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_loc_node_and_return, loc_name)
+            
+    @staticmethod
+    def create_loc_node_and_return(tx, loc_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        query = (
+            "CREATE (l1:Location { loc_name:$loc_name }) "
+            "RETURN l1"
+        )
+        result = tx.run(query, loc_name=loc_name)
+        try:
+            return [{"l1": record["l1"]["loc_name"]}
+                    for record in result]
+        # Capture any errors along with the query and data for traceability
+        except Neo4jError as exception:
+            logging.error("{query} raised an error: \n {exception}".format(
+                query=query, exception=exception))
+            raise
+    
+    def create_event_node(self,event_name):
+        with self.driver.session(database="neo4j") as session:
+            # Write transactions allow the driver to handle retries and transient errors
+            result = session.execute_write(
+                self.create_event_node_and_return, event_name)
+            
+    @staticmethod
+    def create_event_node_and_return(tx, event_name):
+        # To learn more about the Cypher syntax, see https://neo4j.com/docs/cypher-manual/current/
+        # The Reference Card is also a good resource for keywords https://neo4j.com/docs/cypher-refcard/current/
+        query = (
+            "CREATE (e1:Event { event_name:$event_name }) "
+            "RETURN e1"
+        )
+        result = tx.run(query, event_name=event_name)
+        try:
+            return [{"e1": record["e1"]["event_name"]}
+                    for record in result]
+        # Capture any errors along with the query and data for traceability
+        except Neo4jError as exception:
+            logging.error("{query} raised an error: \n {exception}".format(
+                query=query, exception=exception))
+            raise
 
 
 
 
 if __name__ == "__main__":
     # Aura queries use an encrypted connection using the "neo4j+s" URI scheme
-    uri = "neo4j+s://75896199.databases.neo4j.io"
+    uri = "neo4j+s://a6448757.databases.neo4j.io"
     user = "neo4j"
-    password = "tlH7aeOFOCH0D6TUw6lwHWNmCZ11Crr6e1xCySho7m8"
+    password = "76S9fJfoVIBPAyCzfM3GQAFxHX2Xoh6Pw3SYRI-rkzE"
     app = App(uri, user, password)
 
-    person_nodes, hub_nodes, status_nodes = rd.create_data()
+    person_nodes, loc_nodes, status_nodes,status_list,event_nodes = rd.create_data()
+    # Done
     # for key in status_nodes:
     #     app.create_status_node(status_nodes[key]['name'])
-    for key in person_nodes:
-        # app.create_person(person_nodes[key]['id'],person_nodes[key]['name'],person_nodes[key]['age'],person_nodes[key]['status'])
-        app.create_status_relationship(person_nodes[key]['id'],person_nodes[key]['status'])
 
-    # app.create_friendship("Alice", "David")
-    # app.find_person("Alice")
+
+    # # Done
+    # for key in loc_nodes:
+    #     app.create_loc_node(loc_nodes[key])
+
+    # Done
+    for key in event_nodes:
+        app.create_event_node(event_nodes[key]['event_name'])
+
+    for key in person_nodes:
+        app.create_person(person_nodes[key]['id'],person_nodes[key]['name'],person_nodes[key]['age'],person_nodes[key]['loc'])
+
+
+
+    # for key1 in loc_nodes:
+    #     for key2 in event_nodes:
+    #         if loc_nodes[key1] == event_nodes[key2]['loc']:
+
+    #             app.create_event_location_relationship(loc_nodes[key1],event_nodes[key2]['event_name'])
+            
+    for key in person_nodes:
+    #     # app.create_person(person_nodes[key]['id'],person_nodes[key]['name'],person_nodes[key]['age'],person_nodes[key]['loc'])
+    #    app.create_loc_relationship(person_nodes[key]['id'], person_nodes[key]['loc'])
+        
+        rand_val = random.randint(0,len(event_nodes)-1)
+        print(person_nodes[key]['status'])
+        print(event_nodes[rand_val]['status'])
+        if person_nodes[key]['status'] == 'in_person':
+            if event_nodes[rand_val]['status']=='in_person':
+                app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
+                print('inperson')
+        elif person_nodes[key]['status'] == 'remote':
+            if event_nodes[rand_val]['status']=='remote':
+                app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
+                print('remote')
+        elif person_nodes[key]['status'] == 'collaborative':
+            if event_nodes[rand_val]['status']=='collaborative':
+                app.create_event_person_relationship(person_nodes[key]['id'],event_nodes[rand_val]['event_name'])
+                print('collab')
+
+            
+    # for key in status_list:
+    #     for val in status_list[key]:
+    #         app.create_status_relationship(val,key)
+
     app.close()
+
+
+
+
+# MATCH p=(l1)<-[:IS_LOC_IN]-(e1) 
+# MATCH q=(p1)-[:LOCATED_AT]->(l1) 
+# MATCH r=(l1:Location)-[:CONNECTED_TO]->(s1:Status) 
+# MATCH t=(p1:Person)-[:IS_AT]->(e1:Event)
+
+# return p,q,r,t;
