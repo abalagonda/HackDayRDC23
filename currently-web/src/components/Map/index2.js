@@ -47,7 +47,7 @@ const nodes = [
 
       image: "https://super.so/icon/dark/twitch.svg",
       size: 20,
-    },
+    }
 ];
 
 const edges= [

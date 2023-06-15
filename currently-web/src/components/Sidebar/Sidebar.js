@@ -3,7 +3,8 @@ import './Sidebar.css';
 import { Navigation } from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import Event from '../Event/Event';
-function Sidebar({sidebar_name, sidebar_desc, attendees}) {
+
+const Sidebar = ({sidebar_name, sidebar_desc, attendees}) => {
   const sn = sidebar_name
   const sd = sidebar_desc
   const attendeeList = attendees
